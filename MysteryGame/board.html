@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Case #A2437 — Evidence Board</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="css/styles.css">
+      <link rel="stylesheet" href="css/board.css">
+      <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Special+Elite&family=Permanent+Marker&display=swap" rel="stylesheet">
+   </head>
+   <body>
+
+      <input type="checkbox" id="clue-key-toggle" class="clue-toggle">
+      <input type="checkbox" id="clue-camera-toggle" class="clue-toggle">
+      <input type="checkbox" id="clue-safe-toggle" class="clue-toggle">
+
+      <header class="site-header">
+         <h1 class="site-title">The Missing Rent</h1>
+         <span class="site-case">Case #A2437</span>
+      </header>
+
+      <main>
+         <div class="board-wrap">
+            <div class="board" id="evidence-board">
+
+               <h2 class="board-title">Evidence Board</h2>
+
+               <!-- ─── SVG STRING LAYER ─────────────────── -->
+               <svg class="string-layer" viewBox="0 0 900 620" preserveAspectRatio="none" aria-hidden="true">
+
+                  <!-- KEY connections: Jessica (primary), Gideon (witness) -->
+                  <path class="string key-jessica"   d="M 195 195 Q 310 140 445 260"/>
+                  <path class="string key-gideon"    d="M 195 195 Q 240 280 295 310"/>
+
+                  <!-- CAMERA connections: Jessica (culprit deleted), Nico (hallway) -->
+                  <path class="string camera-jessica" d="M 450 155 Q 450 210 445 260"/>
+                  <path class="string camera-nico"    d="M 450 155 Q 560 200 595 305"/>
+
+                  <!-- SAFE connections: Jessica (knew combo), Iris (predatory leases hint) -->
+                  <path class="string safe-jessica"  d="M 705 195 Q 590 145 445 260"/>
+                  <path class="string safe-iris"     d="M 705 195 Q 660 280 605 310"/>
+
+               </svg>
+
+               <!-- Clue Cards -->
+               <div class="clue-cards-row">
+
+                  <div class="evidence-pin-wrap" id="pin-key">
+                     <label for="clue-key-toggle" class="evidence-card" aria-label="Examine key clue">
+                        <span class="board-pin"></span>
+                        <img src="media/key.png" alt="Missing Key">
+                        <span class="evidence-label">Missing Key</span>
+                     </label>
+                     <div class="clue-note-card" id="note-key">
+                        <span class="board-pin board-pin--note"></span>
+                        <p>Master key missing 2 days before theft. Only tenants with recent maintenance requests received copies — all logged.</p>
+                     </div>
+                  </div>
+
+                  <div class="evidence-pin-wrap" id="pin-camera">
+                     <label for="clue-camera-toggle" class="evidence-card" aria-label="Examine camera footage">
+                        <span class="board-pin"></span>
+                        <img src="media/camera.png" alt="Footage Gap">
+                        <span class="evidence-label">Footage Gap</span>
+                     </label>
+                     <div class="clue-note-card" id="note-camera">
+                        <span class="board-pin board-pin--note"></span>
+                        <p>Camera feed manually deleted — 11:48 PM to 1:12 AM. Whoever did it knew exactly where the DVR was.</p>
+                     </div>
+                  </div>
+
+                  <div class="evidence-pin-wrap" id="pin-safe">
+                     <label for="clue-safe-toggle" class="evidence-card" aria-label="Examine safe">
+                        <span class="board-pin"></span>
+                        <img src="media/safe.png" alt="The Safe">
+                        <span class="evidence-label">The Safe</span>
+                     </label>
+                     <div class="clue-note-card" id="note-safe">
+                        <span class="board-pin board-pin--note"></span>
+                        <p>No forced entry. Opened with the correct combination — the landlord's birthday. Only a handful of people knew it.</p>
+                     </div>
+                  </div>
+
+               </div>
+
+               <!-- ─── Suspects ───────────────── -->
+
+                  <div class="board-suspect" id="board-iris">
+                     <span class="board-pin"></span>
+                     <img src="media/iris-chen.png" alt="Iris Chen">
+                     <span class="suspect-name">Iris Chen</span>
+                     <span class="suspect-status status-cleared">Cleared</span>
+                  </div>
+
+                  <div class="board-suspect" id="board-jessica">
+                     <span class="board-pin board-pin--red"></span>
+                     <img src="media/jessica-pitt.png" alt="Jessica Pitt">
+                     <span class="suspect-name">Jessica Pitt</span>
+                     <span class="suspect-status status-suspect">Primary Suspect</span>
+                  </div>
+
+                  <div class="board-suspect" id="board-gideon">
+                     <span class="board-pin"></span>
+                     <img src="media/gideon-tythorn.png" alt="Gideon Tythorn">
+                     <span class="suspect-name">Gideon Tythorn</span>
+                     <span class="suspect-status status-witness">Key Witness</span>
+                  </div>
+
+                  <div class="board-suspect" id="board-nico">
+                     <span class="board-pin"></span>
+                     <img src="media/nico-cole.png" alt="Nicolas Cole">
+                     <span class="suspect-name">Nicolas Cole</span>
+                     <span class="suspect-status status-cleared">Cleared</span>
+                  </div>
+
+
+               <!-- Pinned Notes on Board -->
+               <div class="pinned-note" id="pnote-alibi">
+                  <span class="board-pin--note"></span>
+                  <p><strong>Iris alibi:</strong> Late call with Mr. Harada until past 1 AM — confirmed by named witness.</p>
+               </div>
+
+               <div class="pinned-note" id="pnote-gideon">
+                  <span class="board-pin--note"></span>
+                  <p><strong>Gideon saw her:</strong> Jessica in lobby 11:30 PM. Contradicts library alibi directly.</p>
+               </div>
+
+               <div class="pinned-note" id="pnote-nico">
+                  <span class="board-pin--note"></span>
+                  <p><strong>Nico — no motive:</strong> Near-free rent from landlord. Stealing would cost him everything.</p>
+               </div>
+
+               <div class="pinned-note" id="pnote-jessica">
+                  <span class="board-pin--note"></span>
+                  <p><strong>Jessica — motive:</strong> Tuition due. Behind on rent. Had been visiting the office repeatedly to request an extension.</p>
+               </div>
+
+            </div>
+         </div>
+      </main>
+
+      <nav class="nav-row" aria-label="Page navigation">
+         <a href="clues.html">← Back to Clues</a>
+         <a href="result.html">Make Your Accusation →</a>
+      </nav>
+   </body>
+</html>

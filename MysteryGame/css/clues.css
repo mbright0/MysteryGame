@@ -1,0 +1,459 @@
+/* ── Folder tag ── */
+.folder-tag {
+   position: absolute;
+   top: -36px;
+   left: 0;
+   background: var(--folder-bgt);
+   padding: 8px 16px;
+   display: inline-flex;
+   align-items: center;
+   gap: 14px;
+   border-radius: 4px 4px 0 0;
+   box-shadow: 0 -2px 6px rgba(0,0,0,.12);
+}
+
+.folder-tag-title {
+   font-family: var(--body-font);
+   font-size: .85rem;
+   color: var(--ink);
+   white-space: nowrap;
+}
+
+.folder-tag-nav {
+   display: flex;
+   gap: 6px;
+}
+
+.folder-nav-btn {
+   font-family: var(--body-font);
+   font-size: 1.1rem;
+   color: var(--ink);
+   text-decoration: none;
+   line-height: 1;
+   opacity: .65;
+   transition: opacity .2s ease, transform .2s ease;
+   display: inline-block;
+}
+
+.folder-nav-btn:hover {
+   opacity: 1;
+   transform: scale(1.25);
+}
+
+/* ── Clues page wrapper ── */
+.clues-wrap {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 80px 24px 0;
+   box-sizing: border-box;
+}
+
+/* ── Folder — reuses styles.css .folder base ── */
+#clues-folder {
+   position: relative;
+   width: min(960px, 92%);
+   height: 580px;
+   margin: 0 auto 0;
+   padding: 40px;
+   background: linear-gradient(to bottom, #e6d497, #f5e6b3);
+   overflow: visible;
+}
+
+/* ── Left paper — crime scene ── */
+#clues-left {
+   position: absolute;
+   width: 44%;
+   min-height: 72%;
+   left: 3%;
+   top: 6%;
+   transform: rotate(-1.5deg);
+   background:
+      repeating-linear-gradient(
+         transparent,
+         transparent 27px,
+         rgba(180,200,220,.35) 28px
+      ),
+      var(--paper);
+   padding: 28px 24px 24px;
+   box-sizing: border-box;
+   overflow: hidden;
+}
+
+/* ── Right paper — suspects ── */
+#clues-right {
+   position: absolute;
+   width: 44%;
+   min-height: 72%;
+   left: 51%;
+   top: 4%;
+   transform: rotate(1deg);
+   background:
+      repeating-linear-gradient(
+         transparent,
+         transparent 27px,
+         rgba(180,200,220,.35) 28px
+      ),
+      var(--paper);
+   padding: 28px 24px 24px;
+   box-sizing: border-box;
+   overflow: hidden;
+}
+
+.page-heading {
+   font-family: var(--marker-font);
+   font-size: 1rem;
+   color: var(--accent);
+   margin: 0 0 14px 0;
+   border-bottom: 2px solid var(--accent);
+   padding-bottom: 4px;
+   letter-spacing: .05em;
+}
+
+/* ── Crime scene frame ── */
+.crime-scene-frame {
+   position: relative;
+   width: 100%;
+   margin-bottom: 14px;
+}
+
+.crime-scene-frame img {
+   width: 100%;
+   max-height: 240px;
+   object-fit: cover;
+   display: block;
+   box-shadow: 0 6px 20px rgba(0,0,0,.4);
+   filter: sepia(.15) contrast(1.05);
+}
+
+.crime-scene-frame::after {
+   content: '';
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   height: 55%;
+   background: linear-gradient(to top, rgba(10,8,4,.72) 0%, transparent 100%);
+   pointer-events: none;
+}
+
+.clues-row {
+   position: absolute;
+   bottom: 16px;
+   left: 0;
+   right: 0;
+   display: flex;
+   gap: 18px;
+   justify-content: center;
+   padding: 0 16px;
+   z-index: 3;
+}
+
+.clue-item {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 5px;
+   text-decoration: none;
+   cursor: pointer;
+   transition: transform .25s ease, filter .25s ease;
+}
+
+.clue-item:hover {
+   transform: translateY(-5px) scale(1.12);
+   filter: brightness(1.15) drop-shadow(0 0 8px rgba(255,220,80,.55));
+}
+
+.clue-item img {
+   width: 44px;
+   height: 44px;
+   object-fit: contain;
+   display: block;
+   filter: sepia(.35) contrast(1.1) brightness(.88) drop-shadow(0 3px 6px rgba(0,0,0,.7));
+   transition: filter .25s ease;
+}
+
+.clue-item:hover img {
+   filter: sepia(.1) contrast(1.1) brightness(1.1) drop-shadow(0 0 10px rgba(255,210,60,.6));
+}
+
+#clue-key-btn    { position: absolute; margin-top: -19%; right: 53%; }
+#clue-camera-btn { position: absolute; margin-top: -35%; right: 7%;  }
+#clue-safe-btn   { position: absolute; margin-top: -10%; right: 33%; }
+
+/* ── Clue notes area ── */
+.clue-notes-area {
+   min-height: 28px;
+   padding: 0 2px;
+}
+
+.clue-found-toggle { display: none; }
+
+.clue-note {
+   opacity: 0;
+   pointer-events: none;
+   font-family: var(--marker-font);
+   font-size: .78rem;
+   color: #2a1a0a;
+   line-height: 1.6;
+   letter-spacing: .01em;
+   margin: 8px 0 0 4px;
+   transform: rotate(-.3deg) translateY(4px);
+   transition: opacity .5s ease, transform .5s ease;
+}
+
+/* Reveal each note when its checkbox is checked */
+#found-key-toggle:checked    ~ .clue-notes-area #found-key,
+#found-camera-toggle:checked ~ .clue-notes-area #found-camera,
+#found-safe-toggle:checked   ~ .clue-notes-area #found-safe {
+   opacity: 1;
+   pointer-events: auto;
+   transform: rotate(-.3deg) translateY(0);
+}
+
+/* Fade out and disable clue button once checked */
+#found-key-toggle:checked    ~ .crime-scene-frame #clue-key-btn,
+#found-camera-toggle:checked ~ .crime-scene-frame #clue-camera-btn,
+#found-safe-toggle:checked   ~ .crime-scene-frame #clue-safe-btn {
+   opacity: .28;
+   filter: grayscale(1) brightness(.6);
+   pointer-events: none;
+   cursor: default;
+   transition: opacity .4s ease, filter .4s ease;
+}
+
+.clue-hint {
+   font-family: var(--body-font);
+   font-size: .65rem;
+   color: #888;
+   margin-top: 14px;
+   font-style: italic;
+   text-align: center;
+}
+
+/* ── Interview grid ── */
+.interview-grid {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   gap: 16px;
+}
+
+.suspect-slot { position: relative; }
+
+.suspect-slot input[type="checkbox"] { display: none; }
+
+.interview-card {
+   position: relative;
+   background: white;
+   padding: 10px 10px 32px 10px;
+   box-shadow: var(--photo-shadow);
+   cursor: pointer;
+   transition: transform .22s ease, box-shadow .22s ease;
+   text-decoration: none;
+   color: var(--ink);
+   display: block;
+}
+
+.interview-card:hover {
+   transform: scale(1.07) rotate(-1deg);
+   box-shadow: 0 16px 36px rgba(0,0,0,.5);
+}
+
+.interview-card img {
+   width: 100%;
+   height: 110px;
+   object-fit: cover;
+   object-position: top;
+   display: block;
+}
+
+.interview-card h3 {
+   font-family: var(--marker-font);
+   font-size: .84rem;
+   margin: 8px 0 0;
+   text-align: center;
+}
+
+.suspect-slot input:checked ~ .interview-card {
+   filter: grayscale(1) opacity(.42);
+   pointer-events: none;
+}
+
+.suspect-slot input:checked ~ .interview-card .card-pin {
+   background: #333;
+}
+
+/* ── Interview overlays (:target) ── */
+.interview-overlay {
+   display: none;
+   position: fixed;
+   inset: 0;
+   z-index: 300;
+   background: rgba(10,8,5,.85);
+   justify-content: center;
+   align-items: center;
+}
+
+.interview-overlay:target { display: flex; }
+
+.interview-box {
+   background: var(--paper);
+   border: 2px solid #c8b870;
+   max-width: 520px;
+   width: 94%;
+   box-shadow: 0 24px 60px rgba(0,0,0,.7);
+   animation: popIn .28s ease;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+}
+
+.interview-header {
+   background: linear-gradient(135deg, #2a2018, #3d3020);
+   padding: 18px 22px;
+   display: flex;
+   align-items: center;
+   gap: 16px;
+   border-bottom: 2px solid var(--accent);
+   flex-shrink: 0;
+}
+
+.interview-header img {
+   width: 64px;
+   height: 64px;
+   object-fit: cover;
+   object-position: top;
+   border: 2px solid var(--accent);
+   flex-shrink: 0;
+}
+
+.interview-header-text h2 {
+   font-family: var(--heading-font);
+   font-size: 1rem;
+   color: #f5e6b3;
+   margin: 0 0 4px;
+}
+
+.interview-header-text span {
+   font-family: var(--body-font);
+   font-size: .68rem;
+   color: #a09060;
+   letter-spacing: .08em;
+   text-transform: uppercase;
+}
+
+.interview-body {
+   padding: 18px 22px 10px;
+   overflow-y: auto;
+   max-height: 46vh;
+}
+
+.dialogue {
+   margin-bottom: 12px;
+   display: flex;
+   gap: 10px;
+   align-items: flex-start;
+}
+
+.dialogue-speaker {
+   font-family: var(--heading-font);
+   font-size: .68rem;
+   color: var(--accent);
+   white-space: nowrap;
+   margin-top: 3px;
+   font-weight: 700;
+   min-width: 58px;
+   text-transform: uppercase;
+   letter-spacing: .04em;
+}
+
+.dialogue-text {
+   font-family: var(--body-font);
+   font-size: .78rem;
+   line-height: 1.65;
+   color: #333;
+   background: #f5f0e0;
+   border-left: 3px solid #d4c890;
+   padding: 6px 10px;
+   flex: 1;
+   margin: 0;
+}
+
+/* ── Clue lines — hover-reveal tooltip ── */
+.clue-line {
+   display: flex;
+   gap: 10px;
+   align-items: flex-start;
+   margin-bottom: 12px;
+   cursor: default;
+}
+
+.clue-line .dialogue-speaker { color: #9a7a00; }
+
+.clue-line .dialogue-text {
+   background: #fefae8;
+   border-left: 3px solid #c8a800;
+   position: relative;
+   padding-right: 54px;
+   transition: background .2s ease, border-color .2s ease;
+}
+
+.clue-line .dialogue-text::after {
+   content: '✦ CLUE';
+   position: absolute;
+   top: 7px;
+   right: 8px;
+   font-size: .52rem;
+   font-family: var(--heading-font);
+   color: #b8960a;
+   letter-spacing: .1em;
+   font-weight: 700;
+   opacity: .8;
+}
+
+.clue-line:hover .dialogue-text {
+   background: #fdf5cc;
+   border-left-color: #b8960a;
+}
+
+/* Tooltip — hidden until hover */
+.clue-tooltip {
+   display: block;
+   margin-top: 8px;
+   padding: 5px 10px;
+   background: linear-gradient(90deg, #1e1508, #2e2010);
+   border-left: 3px solid #c8a800;
+   color: #f0e4c0;
+   font-family: var(--heading-font);
+   font-size: .62rem;
+   letter-spacing: .06em;
+   opacity: 0;
+   max-height: 0;
+   overflow: hidden;
+   transition: opacity .3s ease, max-height .35s ease, margin-top .3s ease;
+   pointer-events: none;
+}
+
+.clue-line:hover .clue-tooltip {
+   opacity: 1;
+   max-height: 60px;
+   pointer-events: auto;
+}
+
+.interview-footer {
+   padding: 12px 22px 18px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   border-top: 1px solid #e0d8b0;
+   flex-shrink: 0;
+}
+
+.case-note {
+   font-family: var(--body-font);
+   font-size: .65rem;
+   color: #888;
+   font-style: italic;
+}
+
+

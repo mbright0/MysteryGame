@@ -1,0 +1,250 @@
+:root {
+   /* Colors */
+   --folder:       #f5e6b3;
+   --folder-bgt:   #e6d497;
+   --paper:        #fffef8;
+   --ink:          #222;
+   --accent:       #b22222;
+
+   /* Fonts */
+   --heading-font: 'Libre Baskerville', serif;
+   --body-font:    'Special Elite', monospace;
+   --marker-font:  'Permanent Marker', cursive;
+
+   /* Shadows */
+   --photo-shadow: 0 10px 20px rgba(0,0,0,.4);
+   --paper-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+body {
+   margin: 0;
+   font-family: var(--body-font);
+   color: var(--ink);
+   background-image: url("../media/wood-desk.jpg");
+   background-size: cover;
+   background-position: center;
+   background-attachment: fixed;
+}
+
+ul {
+   list-style-type: none;
+}
+
+
+.paper-stack {
+   position: absolute;
+   width: 90%;
+   min-height: 70%;
+   background: var(--paper);
+   box-shadow: var(--paper-shadow);
+   padding: 36px 40px 44px;
+   box-sizing: border-box;
+   text-align: left;
+   left: 5%;
+   top: 6%;
+}
+/* ── Shared nav button (index page) ── */
+.nav-btn {
+   position: absolute;
+   left: 32%;
+   bottom: 10%;
+}
+
+/* ── Shared bottom nav row (clues / board / result) ── */
+.nav-row {
+   display: flex;
+   justify-content: space-between;
+   padding: 16px 32px;
+   background: rgba(230,212,151,.18);
+   border-top: 1px solid rgba(180,160,90,.3);
+   font-family: var(--body-font);
+   font-size: .78rem;
+}
+
+.nav-row a {
+   color: var(--accent);
+   text-decoration: none;
+   letter-spacing: .08em;
+   transition: opacity .2s;
+}
+
+.nav-row a:hover { opacity: .7; }
+
+/* ── Shared close / done buttons ── */
+.close-btn {
+   display: inline-block;
+   margin-top: 18px;
+   font-family: var(--body-font);
+   font-size: .72rem;
+   color: var(--accent);
+   text-decoration: none;
+   border: 1px solid var(--accent);
+   padding: 6px 16px;
+   letter-spacing: .1em;
+   text-transform: uppercase;
+   transition: background .2s, color .2s;
+}
+
+.close-btn:hover { background: var(--accent); color: white; }
+
+.done-label {
+   display: inline-block;
+   font-family: var(--body-font);
+   font-size: .72rem;
+   color: var(--accent);
+   border: 1px solid var(--accent);
+   padding: 6px 16px;
+   letter-spacing: .1em;
+   text-transform: uppercase;
+   cursor: pointer;
+   transition: background .2s, color .2s;
+}
+
+.done-label:hover { background: var(--accent); color: white; }
+
+.done-label a {
+   color: inherit;
+   text-decoration: none;
+}
+
+/* ── Shared tape strip (replaces thumbtack on index) ── */
+.tape {
+   position: absolute;
+   top: -10px;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 48px;
+   height: 18px;
+   background: rgba(220,210,160,.55);
+   border: 1px solid rgba(180,165,100,.35);
+   box-shadow: 0 1px 3px rgba(0,0,0,.18);
+   cursor: pointer;
+   z-index: 5;
+   transition: background .4s ease, opacity .4s ease;
+}
+
+/* Tape peel — fade centre when checked */
+.suspect-photo input:checked + .tape {
+   background: rgba(220,210,160,.12);
+   border-color: rgba(180,165,100,.15);
+   opacity: .45;
+}
+
+/* ── Shared card pin ── */
+.card-pin {
+   position: absolute;
+   top: -8px;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 12px;
+   height: 12px;
+   background: var(--accent);
+   border-radius: 50%;
+   box-shadow: 0 2px 0 #7a0000, 0 4px 6px rgba(0,0,0,.4);
+   z-index: 3;
+   transition: background .3s;
+}
+
+/* Suspect photo card */
+.suspect-layout {
+   display: grid;
+   grid-template-columns: repeat(2, auto);
+   width: fit-content;
+   gap: 28px;
+   padding: 32px 36px;
+   margin-top: -70px;
+   z-index: 2;
+
+   background:
+      repeating-linear-gradient(
+         transparent,
+         transparent 27px,
+         rgba(150,180,210,.3) 28px
+      ),
+      linear-gradient(to bottom, #fdfcf4, #faf8ec);
+   box-shadow: 0 4px 18px rgba(0,0,0,.35), inset 0 0 0 1px rgba(180,165,100,.2);
+
+   /* Red margin line on left */
+   border-left: 3px solid rgba(200,60,60,.25);
+}
+.suspect-photo {
+   background-color: white;
+   width: 200px;
+   height: 200px;
+   padding: 15px 15px 40px 15px;
+   box-shadow: var(--photo-shadow);
+   perspective: 1000px;
+   z-index: 2;
+}
+
+.suspect-photo img {
+   width: 100%;
+   height: 180px;
+   object-fit: cover;
+   perspective: 1000px;
+}
+
+.suspect-photo h2 {
+   background-color: white;
+   margin-top: 12px;
+   font-family: var(--marker-font);
+   font-size: 18px;
+   color: var(--ink);
+}
+
+.suspect-inner {
+   position: relative;
+   background-color: white;
+   width: 100%;
+   height: 100%;
+   text-align: center;
+
+   transition: transform 0.6s ease;
+   transform-style: preserve-3d;
+}
+
+.suspect-photo-front, .suspect-photo-back {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+
+   top: 0;
+   left: 0;
+   backface-visibility: hidden;
+}
+
+.suspect-photo-front { 
+   transform: rotateY(0deg); 
+}
+
+.suspect-photo input{
+   display: none; 
+}
+
+.suspect-photo input:checked ~ .suspect-inner {
+   transform: rotateY(180deg); 
+}
+
+
+.suspect-photo-back {
+   background-color: white;
+   transform: rotateY(180deg);
+}
+.page-bg{
+/* Notebook paper background */
+   background:
+      repeating-linear-gradient(
+         transparent,
+         transparent 27px,
+         rgba(150,180,210,.3) 28px
+      ),
+      linear-gradient(to bottom, #fdfcf4, #faf8ec);
+   box-shadow: 0 4px 18px rgba(0,0,0,.35), inset 0 0 0 1px rgba(180,165,100,.2);
+
+   /* Red margin line on left */
+   border-left: 3px solid rgba(200,60,60,.25);
+}
+@keyframes popIn {
+   from { transform: scale(.88); opacity: 0; }
+   to   { transform: scale(1);   opacity: 1; }
+}

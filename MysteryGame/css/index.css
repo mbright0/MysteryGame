@@ -1,0 +1,89 @@
+.folder {
+   position: relative;
+   width: 70%;
+   height: 500px;
+   margin: 60px auto;
+   padding: 40px;
+   background: linear-gradient(
+      to bottom, #e6d497, #f5e6b3);
+   z-index: 1;
+}
+
+.folder-tag {
+   background: var(--folder-bgt);
+   margin-top: -69px;
+   margin-left: -40px;
+   padding: 8px 10px;
+   width: 30%;
+}
+
+#top-paper {
+   left: 5%;
+   top: 6%;
+   transform: rotate(-4deg);
+}
+
+#bottom-paper {
+   transform: rotate(2deg);
+   width: 90%;
+   height: 70%;
+}
+
+#crime-scene {
+   position: absolute;
+   margin-top: -420px;
+   left: 20%;
+   transform: rotate(-5deg);
+}
+
+#suspect-intro {
+   position: absolute;
+   margin-top: -450px;
+   left: 60%;
+   transform: rotate(5deg);
+}
+
+#iris-photo { 
+   transform: rotate(-2deg); 
+}
+
+#gideon-photo{ 
+   transform: rotate(1.5deg); 
+}
+
+#jessica-photo { 
+   transform: rotate(2.5deg); 
+}
+
+#nico-photo { 
+   transform: rotate(-1deg); 
+}
+
+.suspect-layout .suspect-photo {
+   transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.suspect-layout .suspect-photo:hover {
+   transform: rotate(0deg) scale(1.04) !important;
+   box-shadow: 0 14px 32px rgba(0,0,0,.45);
+   z-index: 10;
+}
+
+
+.start-btn {
+   font-family: var(--body-font);
+   font-size: .8rem;
+   color: var(--accent);
+   text-decoration: none;
+   border: 2px solid var(--accent);
+   padding: 8px 22px;
+   letter-spacing: .1em;
+   transition: background .2s, color .2s;
+   display: inline-block;
+}
+
+.start-btn:hover {
+   background: var(--accent);
+   color: var(--paper);
+}
+
